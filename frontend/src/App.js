@@ -37,6 +37,7 @@ function App() {
           <div className={ShowWindow ? 'block' : 'hidden'}>
             <AddTodo/>
           </div>
+
           <TodoCard/>
         </div>
       </div>
