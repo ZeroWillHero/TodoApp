@@ -23,7 +23,7 @@ function AddTodo () {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         const todo = {
            title : message,
            author : 1

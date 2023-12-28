@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 function TodoCard() {
   const [todos, setTodos] = useState([]);
+  
+
 
   useEffect(() => {
     fetchData();
@@ -23,6 +25,10 @@ function TodoCard() {
     }
   };
 
+
+  
+ 
+
   const handleCheckBox = (todoId) => {
     setTodos(prevTodos =>
       prevTodos.map(todo =>
@@ -31,8 +37,23 @@ function TodoCard() {
     );
   };
 
+  const HandleDelete = (e) => {
+
+     console.log(e);
+      
+        fetch(`http://127.0.0.1:8000/api/todos/${e}` ,{
+          method: 'DELETE',
+          headers : {"Content-Type" : "application/json"},
+          
+      })
+      
+  }
+
+
+  
+
   return (
-    <div>
+    <form onSubmit={()=> {}}>
       {todos.map((todo) => (
         <div key={todo.id} className="flex bg-white w-auto text-slate-800 justify-between items-center m-2 p-2">
           <input
@@ -44,10 +65,11 @@ function TodoCard() {
             onChange={() => handleCheckBox(todo.id)}
           />
           <p className={todo.checked ? 'line-through italic' : ''}>{todo.title}</p>
-          <button className='bg-red-800 rounded-full w-10 h-10'><i className='bx bxs-minus-circle'></i></button>
+
+          <button className='bg-red-800 rounded-full w-10 h-10' onClick={() => {HandleDelete(todo.id)}}><i className='bx bxs-minus-circle'></i></button>
         </div>
       ))}
-    </div>
+    </form>
   );
 }
 
